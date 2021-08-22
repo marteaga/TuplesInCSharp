@@ -13,16 +13,16 @@ namespace TuplesExample
             var caseDetails = ParseCif(cif);
 
             // output to console for now
-            Console.WriteLine($"Year Id: {caseDetails.Item1}");
-            Console.WriteLine($"Office Id: {caseDetails.Item2}");
-            Console.WriteLine($"Case Id: {caseDetails.Item3}");
+            Console.WriteLine($"Year Id: {caseDetails.yearId}");
+            Console.WriteLine($"Office Id: {caseDetails.officeId}");
+            Console.WriteLine($"Case Id: {caseDetails.caseId}");
         }
 
         /// <summary>
         /// Parse the CIF and set the values of year, office and case parameters passed in
         /// </summary>
         /// <param name="cif"></param>
-        private static (string,string,string) ParseCif(string cif)
+        private static (string yearId, string officeId, string caseId) ParseCif(string cif)
         {
             // make sure it's not null
             if (string.IsNullOrWhiteSpace(cif))
@@ -37,7 +37,10 @@ namespace TuplesExample
             }
 
             // parse the data
-            return (cif.Substring(0, 4), cif.Substring(4, 4), cif.Substring(8, 5));
+            return (
+                yearId: cif.Substring(0, 4), 
+                officeId: cif.Substring(4, 4), 
+                caseId: cif.Substring(8, 5));
         }
 
     }
