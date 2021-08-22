@@ -9,26 +9,20 @@ namespace TuplesExample
             // The CIF to parse
             var cif = "0000111122222";
 
-            // the variables to set
-            string yearId, officeId, caseId;
-
             // call the method to parse
-            ParseCif(cif, out yearId, out officeId, out caseId);
+            var caseDetails = ParseCif(cif);
 
             // output to console for now
-            Console.WriteLine($"Year Id: {yearId}");
-            Console.WriteLine($"Office Id: {officeId}");
-            Console.WriteLine($"Case Id: {caseId}");
+            Console.WriteLine($"Year Id: {caseDetails.Year}");
+            Console.WriteLine($"Office Id: {caseDetails.OfficeId}");
+            Console.WriteLine($"Case Id: {caseDetails.CaseId}");
         }
 
         /// <summary>
         /// Parse the CIF and set the values of year, office and case parameters passed in
         /// </summary>
         /// <param name="cif"></param>
-        /// <param name="yearId"></param>
-        /// <param name="officeId"></param>
-        /// <param name="caseId"></param>
-        private static void ParseCif(string cif, out string yearId, out string officeId, out string caseId)
+        private static Case ParseCif(string cif)
         {
             // make sure it's not null
             if (string.IsNullOrWhiteSpace(cif))
@@ -43,9 +37,37 @@ namespace TuplesExample
             }
 
             // parse the data
-            yearId = cif.Substring(0, 4);
-            officeId = cif.Substring(4, 4);
-            caseId = cif.Substring(8, 5);
+            return new Case
+            {
+                Year = cif.Substring(0, 4),
+                OfficeId = cif.Substring(4, 4),
+                CaseId = cif.Substring(8, 5)
+
+            };
+        }
+
+        public class Case
+        {
+            /// <summary>
+            /// Gets or sets the year the case was created
+            /// </summary>
+            public string Year { get; set; }
+            /// <summary>
+            /// Gets or sets the office that created the case
+            /// </summary>
+            public string OfficeId { get; set; }
+            /// <summary>
+            /// Gets or sets the case id for the cause
+            /// </summary>
+            public string CaseId { get; set; }
+            /// <summary>
+            /// Returns a string that represents the current object which is a composit of the Year, OfficeId, CaseId properties
+            /// </summary>
+            /// <returns>A string that represents the current object which is a composit of the Year, OfficeId, CaseId properties</returns>
+            public override string ToString()
+            {
+                return $"{Year}{OfficeId}{CaseId}";
+            }
         }
     }
 }
