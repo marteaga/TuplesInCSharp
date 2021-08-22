@@ -13,16 +13,16 @@ namespace TuplesExample
             var caseDetails = ParseCif(cif);
 
             // output to console for now
-            Console.WriteLine($"Year Id: {caseDetails.Year}");
-            Console.WriteLine($"Office Id: {caseDetails.OfficeId}");
-            Console.WriteLine($"Case Id: {caseDetails.CaseId}");
+            Console.WriteLine($"Year Id: {caseDetails.Item1}");
+            Console.WriteLine($"Office Id: {caseDetails.Item2}");
+            Console.WriteLine($"Case Id: {caseDetails.Item3}");
         }
 
         /// <summary>
         /// Parse the CIF and set the values of year, office and case parameters passed in
         /// </summary>
         /// <param name="cif"></param>
-        private static Case ParseCif(string cif)
+        private static Tuple<string,string,string> ParseCif(string cif)
         {
             // make sure it's not null
             if (string.IsNullOrWhiteSpace(cif))
@@ -37,37 +37,8 @@ namespace TuplesExample
             }
 
             // parse the data
-            return new Case
-            {
-                Year = cif.Substring(0, 4),
-                OfficeId = cif.Substring(4, 4),
-                CaseId = cif.Substring(8, 5)
-
-            };
+            return new Tuple<string,string,string>(cif.Substring(0, 4), cif.Substring(4, 4), cif.Substring(8, 5));
         }
 
-        public class Case
-        {
-            /// <summary>
-            /// Gets or sets the year the case was created
-            /// </summary>
-            public string Year { get; set; }
-            /// <summary>
-            /// Gets or sets the office that created the case
-            /// </summary>
-            public string OfficeId { get; set; }
-            /// <summary>
-            /// Gets or sets the case id for the cause
-            /// </summary>
-            public string CaseId { get; set; }
-            /// <summary>
-            /// Returns a string that represents the current object which is a composit of the Year, OfficeId, CaseId properties
-            /// </summary>
-            /// <returns>A string that represents the current object which is a composit of the Year, OfficeId, CaseId properties</returns>
-            public override string ToString()
-            {
-                return $"{Year}{OfficeId}{CaseId}";
-            }
-        }
     }
 }
