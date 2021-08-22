@@ -10,12 +10,12 @@ namespace TuplesExample
             var cif = "0000111122222";
 
             // call the method to parse
-            var caseDetails = ParseCif(cif);
+            var (yearId, officeId, caseId) = ParseCif(cif);
 
             // output to console for now
-            Console.WriteLine($"Year Id: {caseDetails.yearId}");
-            Console.WriteLine($"Office Id: {caseDetails.officeId}");
-            Console.WriteLine($"Case Id: {caseDetails.caseId}");
+            Console.WriteLine($"Year Id: {yearId}");
+            Console.WriteLine($"Office Id: {officeId}");
+            Console.WriteLine($"Case Id: {caseId}");
         }
 
         /// <summary>
