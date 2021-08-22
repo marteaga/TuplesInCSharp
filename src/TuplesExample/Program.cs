@@ -22,7 +22,7 @@ namespace TuplesExample
         /// Parse the CIF and set the values of year, office and case parameters passed in
         /// </summary>
         /// <param name="cif"></param>
-        private static Tuple<string,string,string> ParseCif(string cif)
+        private static (string,string,string) ParseCif(string cif)
         {
             // make sure it's not null
             if (string.IsNullOrWhiteSpace(cif))
@@ -37,7 +37,7 @@ namespace TuplesExample
             }
 
             // parse the data
-            return new Tuple<string,string,string>(cif.Substring(0, 4), cif.Substring(4, 4), cif.Substring(8, 5));
+            return (cif.Substring(0, 4), cif.Substring(4, 4), cif.Substring(8, 5));
         }
 
     }
